@@ -1,0 +1,14 @@
+[Unit]
+Description=%i service with docker compose
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+WorkingDirectory=/home/%i/site
+ExecStart=/home/%i/site/run.sh up -d --remove-orphans
+ExecStop=/home/%i/site/run.sh stop
+
+[Install]
+WantedBy=multi-user.target
